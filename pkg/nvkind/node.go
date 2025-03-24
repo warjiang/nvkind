@@ -33,6 +33,9 @@ func (n *Node) HasGPUs() bool {
 
 func (n *Node) InstallContainerToolkit() error {
 	err := n.runScript(`
+		sed -i s/deb.debian.org/mirrors.volces.com/g /etc/apt/sources.list
+		sed -i s/security.debian.org/mirrors.volces.com/g /etc/apt/sources.list
+
 		apt-get update
 		apt-get install -y gpg
 		curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
